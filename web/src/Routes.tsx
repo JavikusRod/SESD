@@ -7,14 +7,23 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route } from '@redwoodjs/router'
+import { Set, Router, Route } from '@redwoodjs/router'
+import ExternalsLayout from 'src/layouts/Nomeclators/ExternalsLayout'
 
 const Routes = () => {
   return (
-    <Router>
-      <Route path="/" page={HomePage} name="home" />
-      <Route notfound page={NotFoundPage} />
-    </Router>
+    <>
+      <Router>
+        <Set wrap={ExternalsLayout}>
+          <Route path="/nomeclators/externals/new" page={NomeclatorsExternalNewExternalPage} name="nomeclatorsNewExternal" />
+          <Route path="/nomeclators/externals/{id:Int}/edit" page={NomeclatorsExternalEditExternalPage} name="nomeclatorsEditExternal" />
+          <Route path="/nomeclators/externals/{id:Int}" page={NomeclatorsExternalExternalPage} name="nomeclatorsExternal" />
+          <Route path="/nomeclators/externals" page={NomeclatorsExternalExternalsPage} name="nomeclatorsExternals" />
+        </Set>
+        <Route path="/" page={HomePage} name="home" />
+        <Route notfound page={NotFoundPage} />
+      </Router>
+    </>
   )
 }
 

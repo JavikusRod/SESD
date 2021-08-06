@@ -5,6 +5,7 @@ import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 
 import './index.css'
+import './scaffold.css'
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import purple from '@material-ui/core/colors/purple'
