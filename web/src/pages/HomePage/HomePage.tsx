@@ -12,9 +12,20 @@ const HomePage = () => {
         My default route is named <code>home</code>, link to me with `
         <Link to={routes.home()}>Home</Link>`
       </p>
-      <Button variant="contained">Default</Button>
-      <Button variant="contained" color="primary">
-        Primary
+      <Button
+        variant="contained"
+        component={Link}
+        to={routes.nomeclatorsExternals()}
+      >
+        External
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to={routes.nomeclatorsInternals()}
+      >
+        Internal
       </Button>
       <Button variant="contained" color="secondary">
         Secondary
