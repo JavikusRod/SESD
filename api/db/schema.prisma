@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,4 +15,72 @@ model UserExample {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+}
+
+model InputDocument {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  archive      Archive  @relation(fields: [archiveId], references: [id])
+  origin       Internal @relation(fields: [internalId], references: [id])
+  destination  External @relation(fields: [externalId], references: [id])
+  file         Int
+  shippingWays Int[]
+
+  archiveId  Int
+  internalId Int
+  externalId Int
+}
+
+model OutputDocument {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  archive      Archive  @relation(fields: [archiveId], references: [id])
+  origin       External @relation(fields: [externalId], references: [id])
+  destination  Internal @relation(fields: [internalId], references: [id])
+  file         Int
+  shippingWays Int[]
+
+  archiveId  Int
+  internalId Int
+  externalId Int
+}
+
+model ShippingWay {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String
+}
+
+model Archive {
+  id              Int              @id @default(autoincrement())
+  createdAt       DateTime         @default(now())
+  year            Int
+  files           File[]
+  inputDocuments  InputDocument[]
+  outputDocuments OutputDocument[]
+}
+
+model File {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  identifier String
+  name       String
+  archive    Archive  @relation(fields: [archiveId], references: [id])
+  archiveId  Int
+}
+
+model Internal {
+  id              Int              @id @default(autoincrement())
+  createdAt       DateTime         @default(now())
+  name            String
+  inputDocuments  InputDocument[]
+  outputDocuments OutputDocument[]
+}
+
+model External {
+  id              Int              @id @default(autoincrement())
+  createdAt       DateTime         @default(now())
+  name            String
+  inputDocuments  InputDocument[]
+  outputDocuments OutputDocument[]
 }
