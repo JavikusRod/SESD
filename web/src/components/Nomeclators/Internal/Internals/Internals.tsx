@@ -77,11 +77,21 @@ const InternalsList = ({ internals }) => {
         },
       },
       { name: 'name', label: 'Nombre', options: { sort: false } },
-      { name: 'createdAt', label: 'Creado', options: { sort: false } },
+      {
+        name: 'createdAt',
+        label: 'Creado',
+        options: {
+          sort: false,
+          customBodyRender: (value) => {
+            return <>{new Date(value).toISOString().substr(0, 10)}</>
+          },
+        },
+      },
       {
         name: 'acciones',
         label: 'Acciones',
         options: {
+          sort: false,
           customBodyRender: (value, tableMeta, updateValue) => {
             return (
               <>
@@ -115,6 +125,7 @@ const InternalsList = ({ internals }) => {
     ],
     data: internals,
     options: {
+      fixedHeader: true,
       rowsPerPage: 10,
       download: false,
       print: false,
@@ -122,6 +133,20 @@ const InternalsList = ({ internals }) => {
       filter: false,
       selectableRows: 'none',
       responsive: 'standard',
+      textLabels: {
+        body: {
+          noMatch: 'No esta',
+        },
+        pagination: {
+          next: 'Pagina siguiente',
+          previous: 'Pagina anterior',
+          rowsPerPage: 'Paginas por hoja:',
+          displayRows: 'of',
+        },
+        toolbar: {
+          search: 'Buscar',
+        },
+      },
     },
   }
 

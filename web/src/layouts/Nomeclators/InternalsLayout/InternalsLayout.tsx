@@ -19,7 +19,7 @@ const InternalsLayout = ({ children }: InternalLayoutProps) => {
           to={routes.nomeclatorsNewInternal()}
           className="rw-button rw-button-green"
         >
-          <div className="rw-button-icon">+</div> New Internal
+          <div className="rw-button-icon">+</div> Nuevo Interno
         </Link>
       </header>
       <main className="rw-main">{children}</main>

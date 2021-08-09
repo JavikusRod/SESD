@@ -33,12 +33,15 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ internal }: CellSuccessProps<EditInternalById>) => {
-  const [updateInternal, { loading, error }] = useMutation(UPDATE_INTERNAL_MUTATION, {
-    onCompleted: () => {
-      toast.success('Internal updated')
-      navigate(routes.nomeclatorsInternals())
-    },
-  })
+  const [updateInternal, { loading, error }] = useMutation(
+    UPDATE_INTERNAL_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Internal updated')
+        navigate(routes.nomeclatorsInternals())
+      },
+    }
+  )
 
   const onSave = (input, id) => {
     updateInternal({ variables: { id, input } })
@@ -47,10 +50,17 @@ export const Success = ({ internal }: CellSuccessProps<EditInternalById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Internal {internal.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Internal {internal.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <InternalForm internal={internal} onSave={onSave} error={error} loading={loading} />
+        <InternalForm
+          internal={internal}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )
